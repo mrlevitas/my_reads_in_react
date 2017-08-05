@@ -1,16 +1,8 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 
 class Book extends React.Component {
 
-  // const { data } = this.props
-  static propTypes = {
-    // books: PropTypes.array.isRequired,
-    onShelfSelect: PropTypes.func.isRequired
-  }
-
   render() {
-
     const { data } = this.props;
     let imgURL = data.imageLinks.thumbnail ? data.imageLinks.thumbnail : 'http://dvepublishing.com/images/cover_not_available.jpg'
     let authors = data.authors ? data.authors.join(', ') : "Author Unknown"

@@ -10,7 +10,6 @@ class App extends React.Component {
   constructor () {
      super()
      this.state = {
-       showSearchPage: false,
        currentlyReading : [],
        read: [],
        wantToRead: []
@@ -30,6 +29,7 @@ class App extends React.Component {
 
   updateShelf = (book, shelf) => {
     let currShelf = book.shelf
+    book.shelf = shelf
 
     this.setState((state) => ({
       [currShelf]: state[currShelf].filter((b) => b.id !== book.id),
@@ -41,6 +41,8 @@ class App extends React.Component {
   }
 
   addBookToShelf = (book, shelf) => {
+
+    book.shelf = shelf
     this.setState((state) => ({
       [shelf]: state[shelf].concat( [book])
       })
@@ -69,17 +71,17 @@ class App extends React.Component {
               </div>
             </div>
             <div className="open-search">
-              <Link to='/create'>Add a book</Link>
+              <Link to='/search'>Add a book</Link>
             </div>
           </div>
         )}/>
-        <Route path='/create' render={({ history }) => (
+        <Route path='/search' render={({ history }) => (
           <AddBook
             onBookSelect={(book, shelf) => {
               this.addBookToShelf(book, shelf)
-              history.push('/')
+              // history.push('/')
             }}
-            onClearSearch={() => this.setState({ showSearchPage: false })}
+            currState={this.state}
           />
         )}/>
 
