@@ -33,18 +33,7 @@ class App extends React.Component {
 
     this.setState((state) => ({
       [currShelf]: state[currShelf].filter((b) => b.id !== book.id),
-      [shelf]: state[shelf].concat( [book])
-      })
-    )
-
-    BooksAPI.update(book, shelf)
-  }
-
-  addBookToShelf = (book, shelf) => {
-
-    book.shelf = shelf
-    this.setState((state) => ({
-      [shelf]: state[shelf].concat( [book])
+      [shelf]: state[shelf].concat( [book] )
       })
     )
 
@@ -78,7 +67,7 @@ class App extends React.Component {
         <Route path='/search' render={({ history }) => (
           <AddBook
             onBookSelect={(book, shelf) => {
-              this.addBookToShelf(book, shelf)
+              this.updateShelf(book, shelf)
               // history.push('/')
             }}
             currState={this.state}
